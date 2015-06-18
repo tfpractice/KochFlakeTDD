@@ -1,6 +1,5 @@
 describe('snowflake', function() {
     var myGen = new Snowflake();
-
     describe('init/construction', function() {
         it('initializes with an initiator morpheme', function() {
             expect(myGen.initiator).toBe("a");
@@ -21,27 +20,17 @@ describe('snowflake', function() {
     describe('splitString', function() {
         it('creates a split version of the passed string', function() {
             expect(myGen.splitString(myGen.startString)).toContain("a", "-", "-", "a", "-", "-", "a", "-", "-");
-
         });
     });
     describe('#genNextString', function() {
-
         it('alters an input string according to snowflake generator', function() {
             expect(myGen.genNextString(myGen.startString)).toBe("a+a--a+a--a+a--a+a--a+a--a+a--")
-
-
         });
     });
-
-
-
       describe('#genString', function() {
-
         it('returns an altered string agiven number of times', function() {
             // expect(myGen.genString(myGen.startString, 1)).toBe("a+a--a+a--a+a--a+a--a+a--a+a--");
             expect(myGen.genString("a", 2)).toBe("a+a--a+a+a+a--a+a--a+a--a+a+a+a--a+a")
-
-
         });
     });
 });
