@@ -103,9 +103,20 @@ describe('Turtle', function() {
         });
     });
 
-    // describe('#visualize', function() {
-    // 	it('produces an SVG visualization of the screen', function() {
-    // 		//not sure how to check d3js svg objects
-    // 	});
-    // });
+    describe('#visualize', function() {
+        var tDiv = $('<div class="turtleDiv"></div>');
+
+        it('it accepts a DOM selector as an argument', function() {
+            expect(tDiv).toHaveClass("turtleDiv");
+
+        });
+
+        // it('produces an SVG visualization within the selector object', function() {
+        //     myTurtle.visualize(".turtleDiv");
+        //     var d3Check = $('.kochLine');
+        //     var bs = $('.k');
+          
+        //     expect(tDiv).toContainElement("path");
+        // });
+    });
 });

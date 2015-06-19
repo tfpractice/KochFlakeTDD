@@ -12,6 +12,7 @@ function Turtle(sx, sy, sDirection, sMag, sGen) {
     this.startPoint = [this.sx, this.sy];
     this.points.push(this.startPoint);
     this.position = this.startPoint;
+    this.getPoints();
 }
 
 Turtle.prototype.turnLeft = function() {
@@ -35,6 +36,7 @@ Turtle.prototype.moveForward = function(point) {
     var newPoint = [xVal, yVal];
     this.points.push(newPoint);
     this.position = newPoint;
+
 };
 Turtle.prototype.getPoints = function() {
     var splitString = this.string.split("");
@@ -55,10 +57,35 @@ Turtle.prototype.incrementDepth = function(delta) {
     this.depth += delta;
 };
 
- Turtle.prototype.getStringAtDepth = function(d) {
-            this.string = this.generator.genString(this.string, d);
-            // var tempString = this.generator.genString(this.string, d);
-            // this.string = tempString;
-            this.incrementDepth(d);
+Turtle.prototype.getStringAtDepth = function(d) {
+    this.string = this.generator.genString(this.string, d);
+    this.incrementDepth(d);
 
-        };
+};
+
+Turtle.prototype.visualize = function(selector) {
+    d3.selectAll("svg").remove();
+    this.getPoints();
+    var container = d3.select(selector).append('svg')
+    	.classed("kochLine", true)
+        .attr({
+            width: '1000',
+            height: '1000'
+        });
+
+    var lineFunction = d3.svg.line()
+        .x(function(d) {
+            return d[0];
+        })
+        .y(function(d) {
+            return d[1];
+        })
+        .interpolate("linear");
+
+    this.visualization = container.append('path')
+        .attr("d", lineFunction(this.points))
+        .attr('stroke', '#ff00ff');
+
+                
+
+};
